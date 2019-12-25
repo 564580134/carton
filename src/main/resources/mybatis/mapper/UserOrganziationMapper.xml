@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.carton.dao.UserOrganizationMapper">
+
+    <delete id="deleteByUserId">
+        DELETE
+        FROM user_organziation
+        WHERE user_id = #{userId}
+    </delete>
+
+    <select id="selectUserOrganization" resultType="map">
+        SELECT
+          o.organization_id AS organizationId,
+          o.organization_name AS organizationName
+        FROM user_organization uo,organization o
+        WHERE uo.organization_id = o.organization_id
+        AND uo.user_id = #{userId}
+    </select>
+
+</mapper>
