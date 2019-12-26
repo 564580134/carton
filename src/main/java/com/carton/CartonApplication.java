@@ -13,8 +13,6 @@ import tk.mybatis.spring.annotation.MapperScan;
 @SpringBootApplication
 public class CartonApplication {
 
-
-
     public static void main(String[] args) {
         SpringApplication.run(CartonApplication.class, args);
     }

@@ -11,7 +11,6 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -29,13 +28,11 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @ApiOperation("新增用户信息")
     @PostMapping("insert")
     public ServerResponse insertSelective(@ModelAttribute User user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+
         if (userService.repeatUser(user.getPhone())) {
             userService.insertSelective(user);
             return ServerResponse.createBySuccessMessage("success");
